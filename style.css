@@ -1,0 +1,258 @@
+/* Reset geral: remove margens, paddings e define box-sizing para todos os elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Oswald', sans-serif; /* Fonte principal importada do Google Fonts */
+    font-weight: 400;
+    color: #5D5D7D; /* Cor padrão do texto: roxo escuro */
+    text-decoration: none; /* Remove sublinhado de links */
+}
+
+/* Container principal: divide a tela em duas colunas lado a lado */
+.wrapper {
+    display: flex; /* Layout em linha (lado a lado) */
+    height: 100vh; /* Ocupa a altura total da tela */
+    width: 100%; /* Largura total disponível */
+    max-width: 1440px; /* Limite máximo para telas ultrawide */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    position: relative; /* Referência para elementos filhos com position absolute */
+}
+
+/* Coluna esquerda: área de texto e botão */
+.left {
+    display: flex;
+    flex-direction: column; /* Empilha os filhos verticalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    width: 60%; /* Ocupa 60% da largura */
+    padding: clamp(32px, 6vw, 80px); /* Padding fluido: mínimo 32px, ideal 6vw, máximo 80px */
+    gap: 24px; /* Espaço entre h1, p e button */
+}
+
+/* Coluna direita: área do menu e imagem */
+.right {
+    display: flex;
+    flex-direction: column; /* Empilha header e imagem verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    width: 40%; /* Ocupa 40% da largura */
+    background-color: rgba(93, 93, 125, 0.16); /* Fundo lilás semitransparente */
+    position: relative; /* Necessário para o header usar position relative */
+}
+
+/* Cabeçalho com a navegação */
+header {
+    width: 100%;
+    padding: 24px 24px 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza os links de navegação */
+    position: relative; /* Referência para o dropdown do menu mobile */
+}
+
+/* Menu de navegação desktop: links em linha */
+nav {
+    display: flex;
+}
+
+/* Imagem do logo/ilustração */
+img {
+    flex: 1; /* Ocupa o espaço restante da coluna */
+    max-width: 80%; /* Limita a largura máxima */
+    object-fit: contain; /* Mantém proporção sem cortar */
+    margin: auto; /* Centraliza */
+}
+
+/* Título principal */
+h1 {
+    font-size: clamp(32px, 5.5vw, 70px); /* Fluido: mínimo 32px, ideal 5.5vw, máximo 70px */
+    line-height: 1.15; /* Altura de linha proporcional */
+    width: min(368px, 100%); /* Máximo 368px, mas não ultrapassa o container */
+}
+
+/* Parágrafo descritivo */
+p {
+    font-size: clamp(14px, 2.2vw, 28px); /* Fluido: mínimo 14px, ideal 2.2vw, máximo 28px */
+    line-height: 1.7;
+    opacity: 0.6; /* Texto levemente transparente */
+    width: 90%;
+}
+
+/* Botão de call-to-action */
+button {
+    width: clamp(180px, 20vw, 269px); /* Largura fluida */
+    height: clamp(48px, 5vw, 62px); /* Altura fluida */
+    background: #9499EA; /* Fundo roxo */
+    box-shadow: 0px 10px 24px rgba(148, 153, 234, 0.09); /* Sombra suave */
+    border: none;
+    border-radius: 30px; /* Bordas arredondadas */
+    font-size: clamp(16px, 1.8vw, 24px); /* Texto fluido */
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+/* Efeito hover no botão */
+button:hover {
+    opacity: 0.8;
+}
+
+/* Links do menu */
+a {
+    font-size: clamp(14px, 1.8vw, 28px); /* Tamanho fluido */
+    line-height: 1.5;
+    margin-right: clamp(16px, 2.5vw, 41px); /* Espaço entre links fluido */
+    cursor: pointer;
+}
+
+/* Segundo link com opacidade reduzida (estilo de link inativo) */
+a:nth-child(2) {
+    opacity: .4;
+}
+
+/* Efeito hover nos links */
+a:hover {
+    opacity: 0.4;
+}
+
+/* Efeito ao clicar nos links */
+a:active {
+    opacity: 0.8;
+}
+
+/* ===================== MENU HAMBURGER ===================== */
+
+/* Botão hamburger: oculto no desktop, visível no mobile */
+.hamburger {
+    display: none; /* Escondido por padrão no desktop */
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px; /* Espaço entre as três linhas */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 100;
+}
+
+/* Cada linha do ícone hamburger */
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #5D5D7D;
+    border-radius: 3px;
+    transition: all 0.3s ease; /* Animação suave ao virar X */
+}
+
+/* Animação: primeira linha gira para formar o X */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+/* Animação: linha do meio some */
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+/* Animação: última linha gira para completar o X */
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ===================== RESPONSIVIDADE (mobile até 768px) ===================== */
+@media (max-width: 768px) {
+
+    /* Layout em coluna no mobile */
+    .wrapper {
+        flex-direction: column; /* Empilha as seções verticalmente */
+        height: auto;
+        min-height: 100vh;
+        max-height: 812px; /* Altura máxima para telas mobile padrão */
+    }
+
+    /* Texto vem primeiro no mobile */
+    .left {
+        width: 100%;
+        padding: 40px 24px;
+        order: 1; /* Aparece antes da imagem */
+        align-items: center; /* Centraliza horizontalmente */
+        text-align: center; /* Texto centralizado */
+    }
+
+    /* Imagem vem depois no mobile */
+    .right {
+        width: 100%;
+        order: 2; /* Aparece depois do texto */
+    }
+
+    /* Ajuste do header no mobile */
+    header {
+        justify-content: flex-end;
+        padding: 16px 24px;
+    }
+
+    /* Hamburger fixo no canto superior esquerdo */
+    .hamburger {
+        display: flex; /* Visível no mobile */
+        position: fixed; /* Sempre visível ao rolar a página */
+        top: 16px;
+        left: 24px;
+        z-index: 200;
+    }
+
+    /* Menu dropdown: oculto por padrão no mobile */
+    nav {
+        display: none;
+        flex-direction: column; /* Links empilhados verticalmente */
+        position: fixed; /* Sobrepõe o conteúdo */
+        top: 56px; /* Abaixo do botão hamburger */
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 16px 24px;
+        z-index: 199;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra para destacar o menu */
+    }
+
+    /* Menu visível quando a classe .open é adicionada via JS */
+    nav.open {
+        display: flex;
+    }
+
+    /* Links do menu mobile */
+    nav a {
+        margin-right: 0;
+        margin-bottom: 16px; /* Espaço entre os links no mobile */
+        font-size: 24px;
+    }
+
+    /* Imagem menor no mobile */
+    img {
+        max-width: 60%;
+        margin: 20px auto;
+    }
+
+    /* Título ajustado para mobile */
+    h1 {
+        font-size: 40px;
+        line-height: 50px;
+        width: 100%;
+    }
+
+    /* Parágrafo ajustado para mobile */
+    p {
+        font-size: 18px;
+        line-height: 30px;
+        width: 100%;
+    }
+
+    /* Botão ocupa largura total no mobile (até o máximo original) */
+    button {
+        width: 100%;
+        max-width: 269px;
+    }
+}
